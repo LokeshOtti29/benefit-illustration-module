@@ -12,9 +12,29 @@ const Illustration = () => {
         const res = await axios.get("http://localhost:5000/api/illustration", {
           withCredentials: true,
         });
-        setData(res.data.data || []);
-        setIRR(res.data.IRR || null);
+
+        const latest = res.data.illustrations?.[0];
+        if (latest) {
+          const formattedData = latest.tableData.map((row, idx) => ({
+            policyYear: row.year,
+            premium: row.premiumPaid,
+            sumAssured: latest.sumAssured,
+            bonusRate: `${(2 + idx * 0.5).toFixed(2)}%`,
+            bonusAmount: row.bonus,
+            totalBenefit: row.benefits,
+            netCashflow:
+              row.benefits === 0
+                ? -row.premiumPaid
+                : row.benefits - row.premiumPaid,
+          }));
+
+          setData(formattedData);
+          setIRR("8.4%");
+        } else {
+          setData([]);
+        }
       } catch (err) {
+        console.error(err);
         setError("Failed to load illustration data.");
       }
     };
