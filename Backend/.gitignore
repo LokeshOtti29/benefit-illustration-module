@@ -1,0 +1,49 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Database (if any local DB files)
+*.sqlite
+*.sqlite3
+*.db
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
+
+# Optional: Build files
+dist/
+build/
+
+# Optional: Coverage reports
+coverage/
+
+# Optional: PM2 logs
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional: Dependency directories
+jspm_packages/
+
+# Optional: TypeScript files
+*.tsbuildinfo
+
+# Optional: Mongo memory server files (for testing)
+mongodb-memory-server-*
+
