@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 export const calculateAndSave = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.cookies.token;
     if (!token) return res.status(401).json({ message: "No token provided" });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -32,9 +32,11 @@ export const calculateAndSave = async (req, res) => {
     });
 
     await newIllustration.save();
-    res
-      .status(201)
-      .json({ message: "Illustration saved", illustration: newIllustration });
+
+    res.status(201).json({
+      message: "Illustration saved",
+      illustration: newIllustration,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -43,7 +45,7 @@ export const calculateAndSave = async (req, res) => {
 
 export const getIllustrations = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.cookies.token;
     if (!token) return res.status(401).json({ message: "No token provided" });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -52,6 +54,7 @@ export const getIllustrations = async (req, res) => {
     const illustrations = await Illustration.find({ userId }).sort({
       createdAt: -1,
     });
+
     res.status(200).json({ illustrations });
   } catch (error) {
     console.error(error);

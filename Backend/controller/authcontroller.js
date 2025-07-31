@@ -40,11 +40,10 @@ export const login = async (req, res) => {
       expiresIn: "1d",
     });
 
-    // ✅ Set token in httpOnly cookie
     res
       .cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // true if deploying over HTTPS
+        secure: false,
         sameSite: "Strict",
         maxAge: 24 * 60 * 60 * 1000, // 1 day
       })
