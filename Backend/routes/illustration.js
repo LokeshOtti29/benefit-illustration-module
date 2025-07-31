@@ -3,10 +3,11 @@ import {
   calculateAndSave,
   getIllustrations,
 } from "../controller/illustration.js";
+import { verifyToken } from "../middleware/authmiddleware.js";
 
 const router = express.Router();
 
-router.post("/calculate", calculateAndSave);
-router.get("/", getIllustrations);
+router.post("/calculate", verifyToken, calculateAndSave);
+router.get("/", verifyToken, getIllustrations);
 
 export default router;
