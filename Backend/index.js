@@ -18,11 +18,9 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 
-// API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/illustration", illustrationRoutes);
 
-// Connect to DB and start server
 connectDB().then(() => {
   app.listen(process.env.PORT, () => {
     console.log(`🚀 Server running on port ${process.env.PORT}`);

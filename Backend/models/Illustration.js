@@ -18,6 +18,7 @@ const illustrationSchema = new mongoose.Schema(
       {
         year: Number,
         premiumPaid: Number,
+        bonusRate: Number,
         benefits: Number,
         bonus: Number,
       },

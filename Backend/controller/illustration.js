@@ -14,9 +14,10 @@ export const calculateAndSave = async (req, res) => {
     const tableData = [];
     for (let year = 1; year <= pt; year++) {
       const premiumPaid = year <= ppt ? premium : 0;
+      const bonusRate = (2 + (year - 1) * 0.5).toFixed(2);
       const bonus = Math.round(sumAssured * 0.02 * year);
       const benefits = sumAssured + bonus;
-      tableData.push({ year, premiumPaid, bonus, benefits });
+      tableData.push({ year, premiumPaid, bonusRate, bonus, benefits });
     }
 
     const newIllustration = new Illustration({
@@ -30,7 +31,7 @@ export const calculateAndSave = async (req, res) => {
       ppt,
       tableData,
     });
-
+    console.log(newIllustration);
     await newIllustration.save();
 
     res.status(201).json({

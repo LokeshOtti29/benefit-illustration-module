@@ -15,11 +15,12 @@ const Illustration = () => {
 
         const latest = res.data.illustrations?.[0];
         if (latest) {
+          console.log(latest.tableData);
           const formattedData = latest.tableData.map((row, idx) => ({
             policyYear: row.year,
             premium: row.premiumPaid,
             sumAssured: latest.sumAssured,
-            bonusRate: `${(2 + idx * 0.5).toFixed(2)}%`,
+            bonusRate: row.bonusRate + "%",
             bonusAmount: row.bonus,
             totalBenefit: row.benefits,
             netCashflow:
