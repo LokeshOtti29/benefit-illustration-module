@@ -45,7 +45,7 @@ export const login = async (req, res) => {
         httpOnly: true,
         secure: false,
         sameSite: "Strict",
-        maxAge: 24 * 60 * 60 * 1000, // 1 day
+        maxAge: 30 * 60 * 1000,
       })
       .status(200)
       .json({
